@@ -1,0 +1,19 @@
+{
+    "name": "weareframework/postmark-made-easy",
+    "autoload": {
+        "psr-4": {
+            "Weareframework\\PostmarkMadeEasy\\": "src"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Postmark Made Easy",
+            "description": "Postmark Made Easy addon"
+        },
+        "laravel": {
+            "providers": [
+                "Weareframework\\PostmarkMadeEasy\\ServiceProvider"
+            ]
+        }
+    }
+}

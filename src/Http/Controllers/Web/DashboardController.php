@@ -9,10 +9,13 @@ use Statamic\Facades\Site;
 use Statamic\Support\Arr;
 use Illuminate\Http\Request;
 use Statamic\Http\Controllers\CP\CpController;
+use Statamic\Support\Str;
 use Weareframework\PostmarkMadeEasy\Library\Console\Composer;
 use Weareframework\PostmarkMadeEasy\Library\Files\File;
 use Weareframework\PostmarkMadeEasy\Exceptions\PostmarkMadeEasyException;
 use Weareframework\PostmarkMadeEasy\Library\Env\EnvEditor;
+use Statamic\Updater\Updater;
+use Weareframework\PostmarkMadeEasy\Library\Installer\Installer;
 
 class DashboardController extends CpController
 {
@@ -84,14 +87,25 @@ class DashboardController extends CpController
         return;
     }
 
-    public function sendTest(Request $request)
-    {
-        dd('test senttttt');
-    }
-
     public function installOtherPackages()
     {
-        Artisan::call('postmark-made-easy:install-packages');
+        try {
+            $packages = ['symfony/postmark-mailer', 'symfony/http-client'];
+
+            return Installer::packages($packages)->install('*');
+        } catch(\Exception $exception) {
+            return null;
+        }
+    }
+
+    public function removeOtherPackages()
+    {
+        try {
+            $packages = ['symfony/postmark-mailer', 'symfony/http-client'];
+            return Installer::packages($packages)->remove('');
+        } catch(\Exception $exception) {
+            return null;
+        }
     }
 
     /**

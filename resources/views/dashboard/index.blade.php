@@ -14,7 +14,12 @@
     </div>
     <div class="mb-3">
         <div class="card mt-2">
-            <p><strong>Current Status:</strong> On/off</p>
+            @if(class_exists('\\Symfony\\Component\\Mailer\\Bridge\\Postmark\\Transport\\PostmarkTransportFactory'))
+                <p><strong>Current Status:</strong> Ready</p>
+                <remove-external-composer-dependencies></remove-external-composer-dependencies>
+            @else
+                <install-external-composer-dependencies></install-external-composer-dependencies>
+            @endif
         </div>
         <div class="mt-2">
             <publish-form
@@ -25,10 +30,24 @@
                 :values='@json($values)'
             />
         </div>
+
+        <div class="card">
+
+        </div>
         <div class="card mt-2">
             <p @class('mb-1')><strong>Testing</strong> <br> We will use the email set above to send a test email through postmark.</p>
             @if(isset($values['postmark_made_easy_mail_driver']) && !is_null($values['postmark_made_easy_mail_driver']) && !empty($values['postmark_made_easy_mail_driver']))
-                <a href="{{ cp_route('weareframework.postmark-made-easy.dashboard.send-test') }}" class="btn">Send test email</a>
+                <form method="POST" action="{{ cp_route('utilities.email') }}">
+                    @csrf
+
+                    <div class="flex items-center">
+                        <input class="input-text mr-2" type="text" name="email" value="{{ old('email', $values['postmark_made_easy_email'] ?? 'test@test.com') }}" />
+                        <button type="submit" class="btn-primary">{{ __('Send Test Email') }}</button>
+                    </div>
+                    @if ($errors->has('email'))
+                        <p class="mt-1"><small class="help-block text-red">{{ $errors->first('email') }}</small></p>
+                    @endif
+                </form>
             @else
                 <p>No email set above in settings</p>
             @endif

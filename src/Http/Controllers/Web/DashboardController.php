@@ -77,12 +77,19 @@ class DashboardController extends CpController
         $valuesArray = $values->toArray();
         $this->file->write($valuesArray);
 
+        $env = new EnvEditor();
+        $envCurrentContent = $env->getContent();
+
         if (isset($valuesArray['postmark_made_easy_mail_driver']) && !empty($valuesArray['postmark_made_easy_mail_driver'])) {
             $env = new EnvEditor();
             $env->changeEnv([
                 'MAIL_MAILER' => $valuesArray['postmark_made_easy_mail_driver'],
                 'POSTMARK_TOKEN' => $valuesArray['postmark_made_easy_api_key'],
             ]);
+
+            if (! isset($envCurrentContent['MAIL_FROM_ADDRESS']) || empty($envCurrentContent['MAIL_FROM_ADDRESS'])) {
+                $env->addData(['MAIL_FROM_ADDRESS' => $valuesArray['postmark_made_easy_email']]);
+            }
         }
         return;
     }

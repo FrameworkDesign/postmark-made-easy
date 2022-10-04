@@ -17,7 +17,8 @@
             <div class="p-3 relative">
                 <composer-output package="symfony/postmark-mailer" />
                 <p>When this has finished running, please close and reload the page</p>
-                <p v-if="composerHasFinished">Composer has finished</p>
+                <p v-if="composerHasFinished" class="font-bold mt-2">Composer has finished</p>
+                <button v-if="composerHasFinished" class="btn mt-1" @click="reloadPage">Reload page</button>
                 <button
                     class="btn-close absolute top-0 right-0 mt-2 mr-2"
                     :aria-label="__('Close')"
@@ -64,6 +65,10 @@ export default {
 
                 this.modalOpen = true
             }
+        },
+
+        reloadPage() {
+            window.location.reload()
         },
 
         composerFinished() {

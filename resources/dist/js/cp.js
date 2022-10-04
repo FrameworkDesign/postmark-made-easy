@@ -124,6 +124,9 @@ __webpack_require__.r(__webpack_exports__);
         this.modalOpen = true;
       }
     },
+    reloadPage: function reloadPage() {
+      window.location.reload();
+    },
     composerFinished: function composerFinished() {
       this.composerHasFinished = true;
     },
@@ -172,6 +175,9 @@ __webpack_require__.r(__webpack_exports__);
         this.$toast.success("Removing 'symfony/postmark-mailer' 'symfony/http-client' packages");
         this.modalOpen = true;
       }
+    },
+    reloadPage: function reloadPage() {
+      window.location.reload();
     },
     composerFinished: function composerFinished() {
       this.composerHasFinished = true;
@@ -232,7 +238,14 @@ var render = function render() {
           attrs: {
             "package": "symfony/postmark-mailer"
           }
-        }), _vm._v(" "), _c("p", [_vm._v("When this has finished running, please close and reload the page")]), _vm._v(" "), _vm.composerHasFinished ? _c("p", [_vm._v("Composer has finished")]) : _vm._e(), _vm._v(" "), _c("button", {
+        }), _vm._v(" "), _c("p", [_vm._v("When this has finished running, please close and reload the page")]), _vm._v(" "), _vm.composerHasFinished ? _c("p", {
+          staticClass: "font-bold mt-2"
+        }, [_vm._v("Composer has finished")]) : _vm._e(), _vm._v(" "), _vm.composerHasFinished ? _c("button", {
+          staticClass: "btn mt-1",
+          on: {
+            click: _vm.reloadPage
+          }
+        }, [_vm._v("Reload page")]) : _vm._e(), _vm._v(" "), _c("button", {
           staticClass: "btn-close absolute top-0 right-0 mt-2 mr-2",
           attrs: {
             "aria-label": _vm.__("Close")
@@ -245,7 +258,7 @@ var render = function render() {
           }
         })], 1)];
       }
-    }], null, false, 914469920)
+    }], null, false, 3732085129)
   }) : _vm._e()], 1);
 };
 
@@ -303,7 +316,14 @@ var render = function render() {
           attrs: {
             "package": "symfony/postmark-mailer"
           }
-        }), _vm._v(" "), _c("p", [_vm._v("When this has finished running, please close and reload the page")]), _vm._v(" "), _vm.composerHasFinished ? _c("p", [_vm._v("Composer has finished")]) : _vm._e(), _vm._v(" "), _c("button", {
+        }), _vm._v(" "), _c("p", [_vm._v("When this has finished running, please close and reload the page")]), _vm._v(" "), _vm.composerHasFinished ? _c("p", {
+          staticClass: "font-bold mt-2"
+        }, [_vm._v("Composer has finished")]) : _vm._e(), _vm._v(" "), _vm.composerHasFinished ? _c("button", {
+          staticClass: "btn mt-1",
+          on: {
+            click: _vm.reloadPage
+          }
+        }, [_vm._v("Reload page")]) : _vm._e(), _vm._v(" "), _c("button", {
           staticClass: "btn-close absolute top-0 right-0 mt-2 mr-2",
           attrs: {
             "aria-label": _vm.__("Close")
@@ -316,7 +336,7 @@ var render = function render() {
           }
         })], 1)];
       }
-    }], null, false, 914469920)
+    }], null, false, 3732085129)
   }) : _vm._e()], 1);
 };
 
